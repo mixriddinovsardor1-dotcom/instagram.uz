@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InstaUz</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fafafa;font-family:Arial,sans-serif;color:#222}
+header{background:white;border-bottom:1px solid #ddd;padding:15px;display:flex;justify-content:space-around;align-items:center;position:sticky;top:0}
+.logo{font-size:27px;font-weight:bold;color:#d62976}
+input{padding:10px;border:1px solid #ddd;border-radius:8px}
+main{max-width:600px;margin:20px auto;padding:10px}
+.stories{display:flex;gap:15px;overflow:auto;background:white;padding:15px;border:1px solid #ddd;border-radius:10px}
+.story{text-align:center;min-width:65px;font-size:12px}
+.circle{width:58px;height:58px;border-radius:50%;border:3px solid #e1306c;padding:3px;font-size:28px;display:grid;place-items:center}
+.post{background:white;border:1px solid #ddd;border-radius:10px;margin-top:20px;overflow:hidden}
+.user{padding:14px;font-weight:bold}
+.photo{height:350px;background:linear-gradient(135deg,#f6a6c1,#9b59b6,#3498db);display:grid;place-items:center;font-size:90px}
+.actions{padding:12px;font-size:25px}
+.actions button{border:0;background:none;font-size:24px;cursor:pointer}
+.caption{padding:0 14px 15px}
+.create{background:white;padding:15px;margin-top:20px;border:1px solid #ddd;border-radius:10px}
+.create input{width:100%;margin-bottom:10px}
+.create button{background:#d62976;color:white;border:0;padding:12px;border-radius:8px;cursor:pointer}
+nav{position:fixed;bottom:0;background:white;width:100%;padding:15px;display:flex;justify-content:space-around;border-top:1px solid #ddd;font-size:23px}
+@media(max-width:500px){header input{width:100px}main{margin:5px auto}.photo{height:300px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">InstaUz</div>
+<input placeholder="Qidirish...">
+<div>❤️　💬</div>
+</header>
+<main>
+<div class="stories">
+<div class="story"><div class="circle">➕</div>Siz</div>
+<div class="story"><div class="circle">😀</div>Ali</div>
+<div class="story"><div class="circle">😎</div>Vali</div>
+<div class="story"><div class="circle">🥰</div>Malika</div>
+<div class="story"><div class="circle">🤩</div>Aziz</div>
+</div>
+<div class="create">
+<h3>Yangi post yaratish</h3>
+<input id="username" placeholder="Ismingiz">
+<input id="caption" placeholder="Post matni">
+<button onclick="addPost()">Joylash</button>
+</div>
+<div id="posts">
+<div class="post">
+<div class="user">👤 InstaUz foydalanuvchisi</div>
+<div class="photo">📸</div>
+<div class="actions">
+<button onclick="like(this)">🤍</button>
+<button>💬</button>
+<button>📤</button>
+</div>
+<div class="caption"><b>InstaUz</b> Bizning yangi ijtimoiy tarmog'imiz! 🚀</div>
+</div>
+</div>
+</main>
+<nav>
+<span>🏠</span><span>🔍</span><span>➕</span><span>🎬</span><span>👤</span>
+</nav>
+<script>
+function like(btn){
+btn.textContent=btn.textContent==="🤍"?"❤️":"🤍";
+}
+function addPost(){
+let name=document.getElementById("username").value.trim()||"Foydalanuvchi";
+let caption=document.getElementById("caption").value.trim();
+if(!caption){alert("Post matnini yozing!");return;}
+let post=document.createElement("div");
+post.className="post";
+post.innerHTML='<div class="user"></div><div class="photo">🌟</div><div class="actions"><button onclick="like(this)">🤍</button> <button>💬</button> <button>📤</button></div><div class="caption"></div>';
+post.querySelector(".user").textContent="👤 "+name;
+post.querySelector(".caption").textContent=caption;
+document.getElementById("posts").prepend(post);
+document.getElementById("caption").value="";
+}
+</script>
+</body>
+</html>
